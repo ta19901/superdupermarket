@@ -29,7 +29,7 @@ public class Simulation {
     }
 
     public void simulate() {
-        productsPrinter.print(products, 1);
+        productsPrinter.print(products, 0);
         IntStream.range(1, iterations + 1).forEach(day -> simulateDay(products, day));
     }
 
