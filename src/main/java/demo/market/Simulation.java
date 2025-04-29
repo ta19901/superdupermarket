@@ -5,11 +5,12 @@ import demo.market.service.ProductsPrinter;
 import demo.market.service.processor.Processor;
 import demo.market.service.source.ProductSource;
 import demo.market.utility.ProductUtility;
+import lombok.Builder;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-import lombok.Builder;
-import lombok.Getter;
 
 public class Simulation {
 

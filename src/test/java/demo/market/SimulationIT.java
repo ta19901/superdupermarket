@@ -1,17 +1,25 @@
 package demo.market;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import demo.market.model.Product;
 import demo.market.service.ProductsPrinter;
 import demo.market.service.processor.ProcessorFactory;
 import demo.market.service.source.ProductDto;
 import demo.market.service.source.StaticProductSource;
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 class SimulationIT {
+
+    private static Simulation createSimulation(List<ProductDto> products, int iterations) {
+        var processor = ProcessorFactory.defaultProcessor();
+        var productsPrinter = new ProductsPrinter(false);
+        var productSource = new StaticProductSource(products);
+        return new Simulation(processor, productsPrinter, productSource, iterations);
+    }
 
     @DisplayName("simulate removal of overdue product")
     @Test
@@ -28,12 +36,5 @@ class SimulationIT {
             .element(0)
             .extracting(Product::getType)
             .isEqualTo("wine");
-    }
-
-    private static Simulation createSimulation(List<ProductDto> products, int iterations) {
-        var processor = ProcessorFactory.defaultProcessor();
-        var productsPrinter = new ProductsPrinter(false);
-        var productSource = new StaticProductSource(products);
-        return new Simulation(processor, productsPrinter, productSource, iterations);
     }
 }

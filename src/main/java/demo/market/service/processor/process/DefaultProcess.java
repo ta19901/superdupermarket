@@ -11,7 +11,6 @@ public class DefaultProcess implements Process {
 
     @Override
     public void process(Product product, int day) {
-        product.setCurrentPrice(
-            calculator.calculate(product.getBasePrice(), product.getQuality()));
+        product.setCurrentPrice(calculator.calculate(product.getBasePrice(), product.getQuality()));
     }
 }

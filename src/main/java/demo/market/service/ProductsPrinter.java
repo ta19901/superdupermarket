@@ -1,10 +1,11 @@
 package demo.market.service;
 
 import demo.market.model.Product;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +20,11 @@ public class ProductsPrinter {
 
     private boolean enabled = true;
 
+    private static void printProduct(Product product) {
+        System.out.printf(
+            PATTERN_PRODUCT, product.getName(), product.getCurrentPrice(), product.getQuality(), product.isOverdue());
+    }
+
     public void print(List<Product> products, int day) {
         if (enabled) {
             System.out.printf("Day %d %n", day);
@@ -27,10 +33,5 @@ public class ProductsPrinter {
             products.forEach(ProductsPrinter::printProduct);
             System.out.println();
         }
-    }
-
-    private static void printProduct(Product product) {
-        System.out.printf(
-            PATTERN_PRODUCT, product.getName(), product.getCurrentPrice(), product.getQuality(), product.isOverdue());
     }
 }

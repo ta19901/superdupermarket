@@ -25,6 +25,6 @@ public class CheeseProcess implements Process {
     }
 
     private boolean isExpired(Product product, int day) {
-        return  day > product.getExpiryDate();
+        return day > product.getExpiryDate();
     }
 }

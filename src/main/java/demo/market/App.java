@@ -1,17 +1,15 @@
 package demo.market;
 
 import demo.market.exception.InvalidCliArgumentException;
-import demo.market.model.Product;
 import demo.market.service.ProductsPrinter;
 import demo.market.service.processor.ProcessorFactory;
 import demo.market.service.source.CsvProductSource;
-import demo.market.service.source.ProductDto;
 import demo.market.service.source.StaticProductSource;
 import demo.market.utility.ProductUtility;
+
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
 
 public class App {
@@ -23,17 +21,14 @@ public class App {
         var iterations = parseIterationsArgument(args);
 
         var simulationBuilder = Simulation.builder()
-            .processor(ProcessorFactory.defaultProcessor())
-            .productsPrinter(new ProductsPrinter(true));
+                .processor(ProcessorFactory.defaultProcessor())
+                .productsPrinter(new ProductsPrinter(true));
 
         csvPath.ifPresentOrElse(
-            path -> simulationBuilder.productSource(new CsvProductSource(",", path)),
-            () -> simulationBuilder.productSource(new StaticProductSource(ProductUtility.createProducts()))
-        );
+                path -> simulationBuilder.productSource(new CsvProductSource(",", path)),
+                () -> simulationBuilder.productSource(new StaticProductSource(ProductUtility.createProducts())));
         iterations.ifPresentOrElse(
-            simulationBuilder::iterations,
-            () -> simulationBuilder.iterations(DEFAULT_ITERATIONS)
-        );
+                simulationBuilder::iterations, () -> simulationBuilder.iterations(DEFAULT_ITERATIONS));
 
         simulationBuilder.build().simulate();
     }
@@ -81,23 +76,5 @@ public class App {
             }
         }
         return Optional.empty();
-    }
-
-    private List<Product> mapProducts(List<ProductDto> productDtos) {
-        return productDtos.stream()
-            .map(this::mapProduct)
-            .toList();
-    }
-
-    private Product mapProduct(ProductDto productDto) {
-        return new Product(
-            productDto.name(),
-            productDto.type(),
-            productDto.expiryDate(),
-            productDto.quality(),
-            productDto.basePrice(),
-            productDto.basePrice(),
-            false,
-            false);
     }
 }

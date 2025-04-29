@@ -1,12 +1,12 @@
 package demo.market.service.processor.process;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import demo.market.model.Product;
 import demo.market.service.pricing.QualityPricing;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CheeseProcessTest {
 
@@ -17,7 +17,7 @@ class CheeseProcessTest {
         "cheese, 50, 30, 1.0"
     })
     void name(String type, int expiryDate, int quality, double basePrice) {
-        var cheese = new Product("c1", type, expiryDate, quality, basePrice, basePrice, false, false);
+        var cheese = new Product("c1", type, expiryDate, basePrice, basePrice, quality,  false, false);
         var cheeseProcess = new CheeseProcess(new QualityPricing());
 
         cheeseProcess.process(cheese, 30);

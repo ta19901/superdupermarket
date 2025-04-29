@@ -63,8 +63,8 @@ public class CsvProductSource implements ProductSource {
                 String line;
                 while ((line = br.readLine()) != null) {
                     var lineValues = Arrays.stream(line.split(delimiter))
-                        .map(String::trim)
-                        .toList();
+                            .map(String::trim)
+                            .toList();
                     products.add(createProductDto(lineValues));
                 }
             }
@@ -75,16 +75,15 @@ public class CsvProductSource implements ProductSource {
         private ProductDto createProductDto(List<String> lineValues) {
             if (lineValues.size() != 5) {
                 throw new CsvParsingException(
-                    "Incorrect number of columns. Must be exactly 5 but was " + lineValues.size() + ".");
+                        "Incorrect number of columns. Must be exactly 5 but was " + lineValues.size() + ".");
             }
 
             return new ProductDto(
-                lineValues.get(0),
-                lineValues.get(1),
-                Integer.parseInt(lineValues.get(2)),
-                Integer.parseInt(lineValues.get(3)),
-                Double.parseDouble(lineValues.get(4))
-            );
+                    lineValues.get(0),
+                    lineValues.get(1),
+                    Integer.parseInt(lineValues.get(2)),
+                    Integer.parseInt(lineValues.get(3)),
+                    Double.parseDouble(lineValues.get(4)));
         }
     }
 }

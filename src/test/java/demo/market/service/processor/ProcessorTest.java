@@ -1,18 +1,18 @@
 package demo.market.service.processor;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
 import demo.market.model.Product;
 import demo.market.service.processor.process.CheeseProcess;
 import demo.market.service.processor.process.DefaultProcess;
 import demo.market.service.processor.process.WineProcess;
-import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Map;
+
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class ProcessorTest {

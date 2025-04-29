@@ -1,11 +1,9 @@
-package demo.market.source;
+package demo.market.service.source;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import demo.market.service.source.CsvProductSource;
-import demo.market.service.source.ProductDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CsvProductSourceTest {
 

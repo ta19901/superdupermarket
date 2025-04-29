@@ -1,10 +1,10 @@
 package demo.market.service.processor.process;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import demo.market.model.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class WineProcessTest {
 

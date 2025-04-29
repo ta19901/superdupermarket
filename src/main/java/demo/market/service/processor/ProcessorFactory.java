@@ -5,9 +5,10 @@ import demo.market.service.processor.process.CheeseProcess;
 import demo.market.service.processor.process.DefaultProcess;
 import demo.market.service.processor.process.ToasterProcess;
 import demo.market.service.processor.process.WineProcess;
-import java.util.Map;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+
+import java.util.Map;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProcessorFactory {
