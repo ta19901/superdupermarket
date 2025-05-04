@@ -13,19 +13,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SqlProductSource implements ProductSource {
 
-    private final JdbcQuery jdbcQuery;
+    private final JdbcConn jdbcConn;
 
     @Override
     public List<ProductDto> products() {
         try {
-            return jdbcQuery.queryProducts();
+            return jdbcConn.queryProducts();
         } catch (SQLException e) {
             throw new SqlProductQueryException(e);
         }
     }
 
-    @RequiredArgsConstructor
-    public static class JdbcQuery {
+    public static class JdbcConn {
 
         private static final String PRODUCTS_QUERY = """
             SELECT *
@@ -34,6 +33,12 @@ public class SqlProductSource implements ProductSource {
         private final String connection;
         private final String username;
         private final String password;
+
+        public JdbcConn(String host, int port, String database, String username, String password) {
+            this.connection = String.format("jdbc:postgresql://%s:%d/%s", host, port, database);
+            this.username = username;
+            this.password = password;
+        }
 
         private List<ProductDto> queryProducts() throws SQLException {
             try (Connection c = DriverManager.getConnection(connection, username, password);

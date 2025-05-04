@@ -1,6 +1,6 @@
 package demo.market.service.source;
 
-import demo.market.service.source.SqlProductSource.JdbcQuery;
+import demo.market.service.source.SqlProductSource.JdbcConn;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -18,10 +18,14 @@ class SqlProductSourceTest {
 
     @Test
     void fetchesProductsFromDatabase() {
-        var connection = String.format("jdbc:postgresql://localhost:%d/%s", postgreSQLContainer.getFirstMappedPort(),
-                postgreSQLContainer.getDatabaseName());
-        var jdbcQuery = new JdbcQuery(connection, postgreSQLContainer.getUsername(), postgreSQLContainer.getPassword());
-        var sqlProductSource = new SqlProductSource(jdbcQuery);
+        var jdbcConn = new JdbcConn(
+                "localhost",
+                postgreSQLContainer.getFirstMappedPort(),
+                postgreSQLContainer.getDatabaseName(),
+                postgreSQLContainer.getUsername(),
+                postgreSQLContainer.getPassword()
+        );
+        var sqlProductSource = new SqlProductSource(jdbcConn);
 
         var products = sqlProductSource.products();
 
